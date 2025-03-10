@@ -96,14 +96,20 @@ playwright install
 npm install -g lighthouse
 ```
 
-## Running the Scripts
+## Running all the Tests
+The tests support external variable injection via the --target-url, for Example:  
+
+```bash
+pytest --target-url https://www.qa.cbssports.com/betting
+```
+
 
 ### Running API Tests
 
 To validate API data using pytest, run:
 
 ```bash
-pytest -v test_posts_api.py
+pytest -v test_posts_api.py --target-url {URL}
 ```
 
 This command fetches posts from JSONPlaceholder and validates each post according to the defined criteria.
@@ -113,17 +119,34 @@ This command fetches posts from JSONPlaceholder and validates each post accordin
 To analyze website performance, run:
 
 ```bash
-pytest -k test_lighthouse -v test_performance.py
+pytest -k test_lighthouse -v test_performance.py --target-url {URL}
 ```
 To validate resources, run:
 
 ```bash
-pytest -k test_resource_validation -v test_performance.py
+pytest -k test_resource_validation -v test_performance.py --target-url {URL}
 ```
 
 This script will:
 - Execute Google Lighthouse on the specified website, generate a JSON report, extract key scores, and export them to a CSV file.
 - Use Playwright to monitor the website’s network requests, logging any broken resource requests (non-200 status codes) to a CSV file.
+
+## CI/CD Integration
+
+1. Build the Docker Image:
+   docker build -t website-analysis .
+2. Run the Docker Container:
+   docker run --rm website-analysis pytest --target-url https://www.qa.cbssports.com/betting
+
+This container includes all necessary dependencies and will run the full test suite automatically.
+
+## Error Handling
+Enhanced error handling is implemented in every step of the process:
+
+Lighthouse Execution: Failures during CLI execution are captured and reported.
+File Operations: Reading and writing of CSV/JSON files include exception handling.
+Browser Navigation: Any issues during navigation or network monitoring in Playwright trigger clear error messages.
+API Requests: HTTP errors and data validation failures are caught and detailed information is provided.
 
 ## How It Works
 
