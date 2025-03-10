@@ -134,10 +134,13 @@ This script will:
 ## CI/CD Integration
 
 1. Build the Docker Image:
+   ```bash
    docker build -t website-analysis .
+   ```
 2. Run the Docker Container:
+   ```bash
    docker run --rm website-analysis pytest --target-url https://www.qa.cbssports.com/betting
-
+   ```
 This container includes all necessary dependencies and will run the full test suite automatically.
 
 ## Error Handling
