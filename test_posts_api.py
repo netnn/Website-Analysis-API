@@ -1,16 +1,5 @@
-import requests
 import pytest
-
-def fetch_posts():
-    """
-    Fetch posts from the API and return them as a list of dictionaries.
-    """
-    try:
-        response = requests.get("https://jsonplaceholder.typicode.com/posts")
-        response.raise_for_status()
-        return response.json()
-    except Exception as e:
-        pytest.fail(f"Error fetching posts: {e}")
+from posts_api import fetch_posts
 
 @pytest.mark.parametrize("post", fetch_posts())
 def test_post_api(post):
