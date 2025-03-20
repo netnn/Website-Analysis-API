@@ -105,23 +105,8 @@ playwright install
 npm install -g lighthouse
 ```
 
-## Running all the Tests
-The tests support external variable injection via the --target-url, for Example:  
-
-```bash
-pytest --target-url https://www.qa.cbssports.com/betting
-```
-
-
-### Running API Tests
-
-To validate API data using pytest, run:
-
-```bash
-pytest -v test_posts_api.py
-```
-
-This command fetches posts from JSONPlaceholder and validates each post according to the defined criteria.
+## Running the Tests:  
+The tests support external variable injection via the --target-url:  
 
 ### Running Performance and Resource Validation Tests
 
@@ -139,6 +124,16 @@ pytest -k test_resource_validation -v test_performance.py --target-url {URL}
 This script will:
 - Execute Google Lighthouse on the specified website, generate a JSON report, extract key scores, and export them to a CSV file.
 - Use Playwright to monitor the website’s network requests, logging any broken resource requests (non-200 status codes) to a CSV file.
+
+### Running API Tests:  
+
+To validate API data using pytest, run:
+
+```bash
+pytest -v test_posts_api.py
+```
+
+This command fetches posts from JSONPlaceholder and validates each post according to the defined criteria.
 
 ## CI/CD Integration
 
