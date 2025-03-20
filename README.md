@@ -109,7 +109,7 @@ pytest --target-url https://www.qa.cbssports.com/betting
 To validate API data using pytest, run:
 
 ```bash
-pytest -v test_posts_api.py --target-url {URL}
+pytest -v test_posts_api.py
 ```
 
 This command fetches posts from JSONPlaceholder and validates each post according to the defined criteria.
