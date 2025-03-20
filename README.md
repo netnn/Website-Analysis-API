@@ -19,17 +19,26 @@ This repository contains automation scripts to help monitor and validate both we
      Utilizes [Playwright](https://playwright.dev) to navigate the website and verify that all resources (CSS, JS, images) load correctly. Any broken requests (non-200 status codes) are logged into a CSV file for further analysis.
 
 2. **API Data Retrieval and Validation**
-   - **Data Fetching:**  
-     Retrieves a list of posts from [JSONPlaceholder](https://jsonplaceholder.typicode.com/posts).
-   - **Data Validation:**  
-     Uses [pytest](https://docs.pytest.org) to validate that each post has:
-     - A numeric `userId`.
-     - A non-empty `title`.
-     - A non-empty `body`.
-     
-     Each post is treated as an individual test case, and detailed error messages are provided for any failures.
+- **posts_api.py**  
+  Contains the API data fetching logic and helper function.
+  
+   - **API_URL** : The endpoint URL is stored in a variable, making it easy to update if needed.
+   - **validate_json_response(response)**: Checks if the response contains JSON data by verifying the Content-Type header. Raises a ValueError if the response is not JSON.    
+   - **fetch_posts()**: Fetches posts from the API, validates the response using validate_json_response, and returns the JSON data.
+- **test_posts_api.py**
+   Contains the pytest-based test cases.
+
+   - Uses fetch_posts() from posts_api.py to retrieve data.
+   - Validates that each post has:
+      - A numeric userId.
+      - A non-empty title.
+      - A non-empty body.
+     Each post is treated as an individual test case with detailed error messages for any validation failures.
 
 ## Repository Structure
+
+- **posts_api.py**  
+  Contains the API data fetching logic and helper function.
 
 - **test_posts_api.py**  
   Script for fetching and validating API data using pytest.
