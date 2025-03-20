@@ -32,8 +32,8 @@ This repository contains automation scripts to help monitor and validate both we
    - Validates that each post has:
       - A numeric userId.
       - A non-empty title.
-      - A non-empty body.
-     Each post is treated as an individual test case with detailed error messages for any validation failures.
+      - A non-empty body.  
+     Each post is treated as an individual test case with detailed error messages for any validation failures.  
 
 ## Repository Structure
 
